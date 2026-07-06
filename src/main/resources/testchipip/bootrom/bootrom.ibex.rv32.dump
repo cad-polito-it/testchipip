@@ -1,0 +1,100 @@
+
+bootrom.ibex.rv32.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.resetanchor:
+
+00010000 <.text.resetanchor>:
+   10000:	0800006f          	j	10080 <_hang80>
+
+Disassembly of section .text.hang80:
+
+00010080 <_hang80>:
+   10080:	0800006f          	j	10100 <_hang>
+
+Disassembly of section .text.hang:
+
+00010100 <_hang>:
+   10100:	00000517          	auipc	a0,0x0
+   10104:	10050513          	addi	a0,a0,256 # 10200 <_trap_vec>
+   10108:	30551073          	csrw	mtvec,a0
+   1010c:	4521                	li	a0,8
+   1010e:	30451073          	csrw	mie,a0
+   10112:	4521                	li	a0,8
+   10114:	30052073          	csrs	mstatus,a0
+   10118:	10500073          	wfi
+   1011c:	bff5                	j	10118 <_hang+0x18>
+
+Disassembly of section .text.vec:
+
+00010200 <_trap_vec>:
+   10200:	0100006f          	j	10210 <_park>
+   10204:	00c0006f          	j	10210 <_park>
+   10208:	0080006f          	j	10210 <_park>
+   1020c:	0060006f          	j	10212 <_boot>
+
+00010210 <_park>:
+   10210:	a001                	j	10210 <_park>
+
+00010212 <_boot>:
+   10212:	020005b7          	lui	a1,0x2000
+   10216:	0005a023          	sw	zero,0(a1) # 2000000 <_dtb+0x1fefd00>
+   1021a:	6285                	lui	t0,0x1
+   1021c:	0002a503          	lw	a0,0(t0) # 1000 <ROM_BASE-0xf000>
+   10220:	34151073          	csrw	mepc,a0
+   10224:	f1402573          	csrr	a0,mhartid
+   10228:	00000597          	auipc	a1,0x0
+   1022c:	0d858593          	addi	a1,a1,216 # 10300 <_dtb>
+   10230:	08000613          	li	a2,128
+   10234:	30063073          	csrc	mstatus,a2
+   10238:	30200073          	mret
+   1023c:	0001                	nop
+   1023e:	00000013          	nop
+   10242:	00000013          	nop
+   10246:	00000013          	nop
+   1024a:	00000013          	nop
+   1024e:	00000013          	nop
+   10252:	00000013          	nop
+   10256:	00000013          	nop
+   1025a:	00000013          	nop
+   1025e:	00000013          	nop
+   10262:	00000013          	nop
+   10266:	00000013          	nop
+   1026a:	00000013          	nop
+   1026e:	00000013          	nop
+   10272:	00000013          	nop
+   10276:	00000013          	nop
+   1027a:	00000013          	nop
+   1027e:	00000013          	nop
+   10282:	00000013          	nop
+   10286:	00000013          	nop
+   1028a:	00000013          	nop
+   1028e:	00000013          	nop
+   10292:	00000013          	nop
+   10296:	00000013          	nop
+   1029a:	00000013          	nop
+   1029e:	00000013          	nop
+   102a2:	00000013          	nop
+   102a6:	00000013          	nop
+   102aa:	00000013          	nop
+   102ae:	00000013          	nop
+   102b2:	00000013          	nop
+   102b6:	00000013          	nop
+   102ba:	00000013          	nop
+   102be:	00000013          	nop
+   102c2:	00000013          	nop
+   102c6:	00000013          	nop
+   102ca:	00000013          	nop
+   102ce:	00000013          	nop
+   102d2:	00000013          	nop
+   102d6:	00000013          	nop
+   102da:	00000013          	nop
+   102de:	00000013          	nop
+   102e2:	00000013          	nop
+   102e6:	00000013          	nop
+   102ea:	00000013          	nop
+   102ee:	00000013          	nop
+   102f2:	00000013          	nop
+   102f6:	00000013          	nop
+   102fa:	00000013          	nop
+   102fe:	00000013          	nop
